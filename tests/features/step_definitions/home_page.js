@@ -15,7 +15,11 @@ capabilities.set('chromeOptions', {
     "headless": true,
     args: ['headless', 'disable-gpu', 'no-sandbox', 'disable-dev-shm-usage', 'disable-extensions']
 });
-const driver = new Builder().withCapabilities(capabilities).build();
+const driver = await new Builder()
+    .usingServer(`http://selenium:4444`)
+    .forBrowser('chrome')
+    .withCapabilities(capabilities)
+    .build();
 
 Given('The user navigates to the application', async function () {
     await driver.get(HOST);
