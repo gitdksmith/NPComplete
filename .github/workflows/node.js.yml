@@ -30,6 +30,7 @@ jobs:
         cache: 'npm'
     - name: Setup chrome driver environment
       run: |
+        sudo apt-get install -y libxml2-utils
         sudo apt-get install -y google-chrome-stable 
         VERSION=`google-chrome --version | egrep -o '[0-9]+.[0-9]+' | head -1` 
         npm i webdriver-manager@latest -D 
