@@ -1,6 +1,6 @@
 const assert = require('assert');
 const { Given, When, Then, AfterAll } = require('@cucumber/cucumber');
-const { Builder, By, Capabilities, Key } = require('selenium-webdriver');
+const { Builder, By, Capabilities, Key, WebDriver} = require('selenium-webdriver');
 const expect = require('expect').expect;
 require("chromedriver");
 
@@ -8,7 +8,12 @@ const HOST = 'http://localhost:3000'; // todo need a better way to do this for o
 
 // driver setup
 const capabilities = Capabilities.chrome();
-capabilities.set('chromeOptions', { "w3c": false });
+capabilities.set('chromeOptions', { 
+    "w3c": false,
+    "--no-sandbox": true,
+    "--disable-dev-shm-usage": true, 
+    "--disable-gpu": true,
+});
 const driver = new Builder().withCapabilities(capabilities).build();
 
 Given('The user navigates to the application', async function () {
