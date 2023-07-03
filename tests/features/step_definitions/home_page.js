@@ -15,7 +15,7 @@ capabilities.set('chromeOptions', {
     "headless": true,
     args: ['headless', 'disable-gpu', 'no-sandbox', 'disable-dev-shm-usage', 'disable-extensions']
 });
-const driver = await new Builder()
+const driver = new Builder()
     .usingServer(`http://selenium:4444`)
     .forBrowser('chrome')
     .withCapabilities(capabilities)
