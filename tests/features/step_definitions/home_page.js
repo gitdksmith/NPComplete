@@ -22,6 +22,6 @@ Then('The app should be displayed', async () => {
     expect(element).toBeTruthy();
 });
 
-// AfterAll(async function(){
-//     await driver.quit();
-// });
+AfterAll(async function(){
+    await driver.quit();
+});
