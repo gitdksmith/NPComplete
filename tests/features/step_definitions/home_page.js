@@ -8,10 +8,10 @@ const HOST = 'http://localhost:3000'; // todo need a better way to do this for o
 
 // driver setup
 const capabilities = Capabilities.chrome();
-capabilities.set('chromeOptions', { 
-    "w3c": false,
-    "args": ['--headless', '--no-sandbox', '--disable-dev-shm-usage']
-});
+// capabilities.set('chromeOptions', { 
+//     "w3c": false,
+//     "args": ['--headless', '--no-sandbox', '--disable-dev-shm-usage']
+// });
 const driver = new Builder().withCapabilities(capabilities).build();
 
 Given('The user navigates to the application', async function () {
