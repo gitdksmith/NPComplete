@@ -28,6 +28,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - uses: nanasess/setup-chromedriver@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
@@ -35,21 +36,8 @@ jobs:
         cache: 'npm'
     - name: Setup chrome driver environment
       run: |
-        sudo apt-get update 
-        sudo apt-get clean 
-        sudo apt-get install -y which
-        sudo apt-get install -y wget 
-        wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
-        sudo apt-get -y update 
-        sudo apt-get install -y google-chrome-stable 
-        VERSION=`google-chrome --version | egrep -o '[0-9]+.[0-9]+' | head -1` 
-        npm i webdriver-manager@latest -D 
-        npm i chromedriver --chromedriver_version=$VERSION -D 
-        echo '-----------------------------<> <> <> <>'
-        which chrome
-        which google-chrome
-        which chrome-driver
-        which chromedriver
+        export DISPLAY=:99
+        chromedriver --url-base=/wd/hub &
     - run: npm ci
     - run: npm run build --if-present
     - run: npm run cucumber
