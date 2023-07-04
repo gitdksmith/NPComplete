@@ -38,6 +38,7 @@ jobs:
         export DISPLAY=:99
         chromedriver --url-base=/wd/hub &
         google-chrome &
+        command -v google-chrome
     - run: npm ci
     - run: npm run build --if-present
     - run: npm run dev &
