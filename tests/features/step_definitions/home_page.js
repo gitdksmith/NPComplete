@@ -10,10 +10,7 @@ const HOST = 'http://localhost:3000'; // todo need a better way to do this for o
 const capabilities = Capabilities.chrome();
 capabilities.set('chromeOptions', { 
     "w3c": false,
-    "start-maximized": true,
-    "disable-infobars": true,
-    "headless": true,
-    args: ['headless', 'disable-gpu', 'no-sandbox', 'disable-dev-shm-usage', 'disable-extensions']
+    args: ['--headless', '--no-sandbox', 'disable-dev-shm-usage']
 });
 const driver = new Builder().withCapabilities(capabilities).build();
 
