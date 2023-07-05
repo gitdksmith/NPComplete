@@ -11,7 +11,7 @@ const HOST = 'http://localhost:3000'; // todo need a better way to do this for o
 const capabilities = Capabilities.chrome();
 capabilities.set('chromeOptions', { 
     "w3c": false,
-    "args": ['--headless', '--no-sandbox', '--disable-dev-shm-usage']
+    "args": ['--headless', '--no-sandbox', '--disable-dev-shm-usage', '--start-maximized']
 });
 // const options = new Options().setChromeBinaryPath('/usr/bin/google-chrome');
 // local /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
