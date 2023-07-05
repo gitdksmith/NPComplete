@@ -16,7 +16,7 @@ capabilities.set('chromeOptions', {
 // const options = new Options().setChromeBinaryPath('/usr/bin/google-chrome');
 // local /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
 // const driver = new Builder().setChromeOptions(options).withCapabilities(capabilities).build();
-const driver = new Builder().withCapabilities(capabilities).build();
+const driver = new Builder().forBrowser('chrome').withCapabilities(capabilities).build();
 
 Given('The user navigates to the application', async function () {
     await driver.get(HOST);
