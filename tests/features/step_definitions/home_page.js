@@ -13,7 +13,7 @@ capabilities.set('chromeOptions', {
     "w3c": false,
     "args": ['--headless', '--no-sandbox', '--disable-dev-shm-usage']
 });
-const options = new Options().setChromeBinaryPath('/usr/bin/google-chrome');
+// const options = new Options().setChromeBinaryPath('/usr/bin/google-chrome');
 // local /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
 const driver = new Builder().setChromeOptions(options).withCapabilities(capabilities).build();
 
@@ -25,6 +25,6 @@ Then('The app should be displayed', async () => {
     expect(element).toBeTruthy();
 });
 
-AfterAll(async function(){
-    await driver.quit();
-});
+// AfterAll(async function(){
+//     await driver.quit();
+// });
