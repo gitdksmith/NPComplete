@@ -13,9 +13,6 @@ capabilities.set('chromeOptions', {
     "w3c": false,
     "args": ['--headless', '--no-sandbox', '--disable-dev-shm-usage', '--start-maximized']
 });
-// const options = new Options().setChromeBinaryPath('/usr/bin/google-chrome');
-// local /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
-// const driver = new Builder().setChromeOptions(options).withCapabilities(capabilities).build();
 const driver = new Builder().forBrowser('chrome').withCapabilities(capabilities).build();
 
 Given('The user navigates to the application', async function () {
@@ -26,6 +23,6 @@ Then('The app should be displayed', async () => {
     expect(element).toBeTruthy();
 });
 
-// AfterAll(async function(){
-//     await driver.quit();
-// });
+AfterAll(async function(){
+    await driver.quit();
+});
