@@ -7,9 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "cucumber": "cucumber-js tests/features",
+    "cc": "func() { cucumber-js tests/features/\"$1\"; }; func",
     "test": "jest"
-    },
+  },
   "dependencies": {
     "@types/node": "20.3.3",
     "@types/react": "18.2.14",
