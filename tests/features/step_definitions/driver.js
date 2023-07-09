@@ -1,4 +1,4 @@
-const { Builder, By, Capabilities } = require('selenium-webdriver');
+const { Builder, By, Capabilities, Key } = require('selenium-webdriver');
 const { AfterAll } = require('@cucumber/cucumber');
 require("chromedriver");
 
@@ -16,3 +16,4 @@ AfterAll(async function(){
 
 exports.driver = driver;
 exports.By = By;
+exports.Key = Key;

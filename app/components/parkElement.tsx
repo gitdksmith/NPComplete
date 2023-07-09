@@ -16,7 +16,7 @@ export default function ParkElement(props: Props) {
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 <h2>{parkData.fullName}</h2>
                 <p><Link target="_blank" href={parkData.url}>{parkData.url}</Link></p>
-                <h3>{parkData.states}</h3>
+                <h3 className="stateTag">{parkData.states}</h3>
             </div>
             <div className={styles.imageContainer}>
                 <Image

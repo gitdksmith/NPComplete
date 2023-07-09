@@ -31,3 +31,16 @@ When('The user selects show more button', async () => {
     const element = await driver.findElement(By.css("button[class^='page_loadMore']"));
     await element.click();
 })
+
+When('The user selects TX from the state selector dropdown', async () => {
+    const element = await driver.findElement(By.css(".page_dropdownSelect__CA_03 > option:nth-child(52)"));
+    await element.click();
+})
+
+Then('Only TX parks are displayed', async () => {
+    const elements = await driver.findElements(By.className('stateTag'));
+    await Promise.all(elements.map(async (element) => {
+        const text = await element.getText();
+        expect(text.includes('TX')).toBeTruthy();
+    }))
+})
