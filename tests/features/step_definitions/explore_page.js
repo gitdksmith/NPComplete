@@ -16,13 +16,13 @@ Given('The user navigates to the explore page', async function () {
 });
 
 Then('The explore page should be displayed', async () => {
-    const element = await driver.findElement(By.css("div[class^='page_parkElement']"));
+    const element = await driver.findElement(By.css("div[class^='parkElement_parkElement']"));
     expect(element).toBeTruthy();
 })
 
 Then('The explore page shows {int} elements', async (int) => {
     navigateToExplorePage();
-    const elements = await driver.findElements(By.css("div[class^='page_parkElement']"));
+    const elements = await driver.findElements(By.css("div[class^='parkElement_parkElement']"));
     expect(elements.length).toBe(int)
 
 })
