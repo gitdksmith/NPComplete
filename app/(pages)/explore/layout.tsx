@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { ReactNode } from 'react'
-import styles from '../page.module.css'
+import styles from './layout.module.css'
 
 export const metadata: Metadata = {
     title: 'NPComlete Explore',

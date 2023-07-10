@@ -43,12 +43,12 @@
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
 
-    --primary-glow: radial-gradient(rgba(10, 167, 120, 0.578), rgba(1, 255, 166, 0));
+    --primary-glow: radial-gradient(rgba(16, 31, 27, 0.578), rgba(1, 255, 166, 0));
     --secondary-glow: linear-gradient(
       to top right,
       rgba(1, 65, 255, 0),
       rgba(1, 65, 255, 0),
-      rgba(1, 255, 179, 0.495)
+      rgba(26, 45, 39, 0.495)
     );
 
     --tile-start-rgb: 2, 13, 46;
@@ -84,12 +84,16 @@ body {
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
+  /* background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
-    rgb(var(--background-start-rgb));
+    rgb(var(--background-start-rgb)); */
+  background-image: url('./../public/ElCapitanBG.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
 }
 
 a {

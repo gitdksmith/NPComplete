@@ -6,25 +6,8 @@
   margin-bottom: 1rem;
 }
 
-.container {
-  margin: 2rem 2rem 2rem 2rem;
-}
-
 .loadMore {
   color: rgb(0, 255, 34)
-}
-
-.parkElement {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  margin: 1em 0 1em 0;
-  position: relative;
-}
-
-.imageContainer {
-  position:relative;
-  width: 33vw;
-  height: 33vw;
 }
 
 .main {
@@ -111,7 +94,7 @@
 
 .center::before {
   pointer-events: none;
-  background: var(--secondary-glow);
+  /* background: var(--secondary-glow); */
   border-radius: 50%;
   width: 180px;
   height: 360px;
@@ -120,7 +103,7 @@
 
 .center::after {
   pointer-events: none;
-  background: var(--primary-glow);
+  /* background: var(--primary-glow); */
   width: 240px;
   height: 180px;
 }
@@ -180,16 +163,6 @@
 
   .description {
     font-size: 0.8rem;
-  }
-
-  .parkElement {
-    grid-template-columns: 1fr;
-    margin: 1em 0 1em 0
-  }
-
-  .imageContainer {
-    width: 80vw;
-    height: 60vw;
   }
 }
 

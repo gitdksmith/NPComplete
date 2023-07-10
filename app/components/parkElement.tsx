@@ -1,32 +1,47 @@
 'use client'
 
-import { useState } from "react";
 import { ParkData } from "../(pages)/explore/parkDataInterface";
+import { forwardRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import styles from '../(pages)/page.module.css'
+import styles from '../components/parkElement.module.css'
+import useIntersectionOnScreen from "../hooks/useIntersectionObserver";
 
 interface Props {
-    parkData: ParkData
+    parkData: ParkData,
 }
-export default function ParkElement(props: Props) {
+
+const ParkElement = function ParkElement(props: Props) {
     const { parkData } = props;
+
+    // const [containerRef, isVisible ] = useIntersectionOnScreen({
+    //     root: null,
+    //     rootMargin: '-25% 0% -25% 0%',
+    //     threshold: 1
+    // });
+    
     return (
-        <div className={styles.parkElement}>
-            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+        // <div className={`${styles.parkElement} ${isVisible ? styles.parkElementVisible : ''}`}>
+        <div className={`${styles.parkElement}`}>
+            <div /*ref={containerRef}*/ id={styles.sensor}></div>
+            <div className={styles.parkInfo}>
                 <h2>{parkData.fullName}</h2>
                 <p><Link target="_blank" href={parkData.url}>{parkData.url}</Link></p>
                 <h3 className="stateTag">{parkData.states}</h3>
             </div>
             <div className={styles.imageContainer}>
-                <Image
-                    src={(parkData.images[0]||{}).url}
-                    alt={(parkData.images[0]||{}).altText}
-                    fill={true}
-                    sizes="(max-width: 768px) 80vw, 33vw"
-                    style={{objectFit:"cover", overflow:"hidden"}}
-                />
+                <div className={styles.imageCenter}>
+                    <Image
+                        src={(parkData.images[0] || {}).url}
+                        alt={(parkData.images[0] || {}).altText}
+                        fill={true}
+                        sizes="(max-width: 480) 80vw, 66vw"
+                        className={styles.imageObject}
+                    />
+                </div>
             </div>
         </div>
     )
-}
+};
+
+export default ParkElement;
