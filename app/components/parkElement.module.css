@@ -7,6 +7,7 @@
     border-radius: 75px;
     height: 36vh;
     /* transition: all .6s ease; */
+    width: 100%;
 }
 
 .parkElementVisible {
