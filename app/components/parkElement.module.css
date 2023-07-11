@@ -1,0 +1,88 @@
+.parkElement {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    margin: 1em 0 1em 0;
+    position: relative;
+    background: rgba(98, 125, 149, 0.85);
+    border-radius: 75px;
+    height: 36vh;
+    /* transition: all .6s ease; */
+    width: 100%;
+}
+
+.parkElementVisible {
+    height: 46vh;
+    grid-template-columns: 1.5fr 1fr;
+}
+
+#sensor {
+    position: absolute;
+    width: 1px;
+    height: 80px;
+    top: 7em;
+}
+
+.parkInfo {
+    justify-items: center;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: .3rem 1em;
+}
+
+.imageContainer {
+    position: relative;
+    /* width: 33vw; */
+    /* height: 36vh; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.imageCenter {
+    position: relative;
+    height: 90%;
+    width: 90%;
+}
+
+.imageObject {
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 50px;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+
+    .parkElement {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        margin: 1em 0 1em 0;
+        padding: 1em 0;
+        border-radius: 25px;
+        height: auto;
+    }
+
+    .parkElementVisible {
+        height: auto;
+        grid-template-columns: 1fr;
+    }
+
+    .parkInfo {
+        padding: .3rem 1em .3em 1em;
+    }
+
+    .imageContainer {
+        width: 80vw;
+        height: 30vh;
+    }
+
+    .imageObject {
+        object-fit: cover;
+        overflow: hidden;
+        border-radius: 25px;
+    }
+}

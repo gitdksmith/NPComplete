@@ -16,13 +16,13 @@ Given('The user navigates to the explore page', async function () {
 });
 
 Then('The explore page should be displayed', async () => {
-    const element = await driver.findElement(By.css("div[class^='page_parkElement']"));
+    const element = await driver.findElement(By.css("div[class^='parkElement_parkElement']"));
     expect(element).toBeTruthy();
 })
 
 Then('The explore page shows {int} elements', async (int) => {
     navigateToExplorePage();
-    const elements = await driver.findElements(By.css("div[class^='page_parkElement']"));
+    const elements = await driver.findElements(By.css("div[class^='parkElement_parkElement']"));
     expect(elements.length).toBe(int)
 
 })
@@ -31,9 +31,8 @@ When('The user selects show more button', async () => {
     const element = await driver.findElement(By.css("button[class^='page_loadMore']"));
     await element.click();
 })
-
 When('The user selects TX from the state selector dropdown', async () => {
-    const element = await driver.findElement(By.css(".page_dropdownSelect__CA_03 > option:nth-child(52)"));
+    const element = await driver.findElement(By.css("#stateFilter > option:nth-child(52)"));
     await element.click();
 })
 
@@ -44,3 +43,17 @@ Then('Only TX parks are displayed', async () => {
         expect(text.includes('TX')).toBeTruthy();
     }))
 })
+
+When('The user selects Monument from the type selector dropdown', async () => {
+    const element = await driver.findElement(By.css("#typeFilter > option:nth-child(10)"));
+    await element.click();
+})
+
+Then('Only Monument parks are displayed', async () => {
+    const elements = await driver.findElements(By.css("div[class^='parkElement_parkInfo'] > h2"));
+    await Promise.all(elements.map(async (element) => {
+        const text = await element.getText();
+        expect(text.includes('Monument')).toBeTruthy();
+    }))
+})
+

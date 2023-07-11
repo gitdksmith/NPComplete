@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import { ParkData } from "../(pages)/explore/parkDataInterface";
-import { Dropdown, Option } from "./dropdown";
 import ParkElement from "./parkElement";
 import styles from "../(pages)/page.module.css"
-import states from "../states";
+import FilterBar from "./filters/filterBar";
+import {StateFilter, stateFilterFunction} from "./filters/stateFilter";
+import { TypeFilter, typeFilterFunction } from "./filters/typeFilter";
 
 interface Props {
     parkData: ParkData[]
@@ -14,29 +15,27 @@ interface Props {
 const ENV_LIMIT: number = Number.parseInt(process.env.EXPLORE_LIST_LIMIT || '20');
 
 export default function ParkList(props: Props) {
+    const { parkData } = props;
     const [limit, setLimit] = useState(ENV_LIMIT);
     const [selectedState, setSelectedState] = useState<string>(''); // abbreviation
-    const handleSelected = (e:any) => {
+    const handleSelectedState = (e: any) => {
         setSelectedState(e.target.value);
     }
-    
-    const { parkData } = props;
+
+    const [selectedType, setSelectedType] = useState<string>(''); // abbreviation
+    const handleSelectedType = (e: any) => {
+        setSelectedType(e.target.value);
+    }
+
     return (
         <>
-            <Dropdown onChange={handleSelected}>
-                    <Option key={'default'} value={''} text={"State"} />
-                    {
-                    states.map(state => {
-                        return (
-                            <Option key={state.abbreviation} value={state.abbreviation} text={state.name}/>
-                        )
-                    })
-                }
-            </Dropdown>
-            {(selectedState == '' ? parkData : parkData
-                .filter((pd: ParkData) => {
-                    return pd.states.includes(selectedState);
-                }))
+            <FilterBar>
+                <StateFilter handleSelected={handleSelectedState} />
+                <TypeFilter handleSelected={handleSelectedType} />
+            </FilterBar>
+            {stateFilterFunction(
+                typeFilterFunction(parkData, selectedType), 
+                selectedState)
                 .slice(0, limit)
                 .map((pd: ParkData, index: number) => {
                     return <ParkElement key={pd.id} parkData={pd} />

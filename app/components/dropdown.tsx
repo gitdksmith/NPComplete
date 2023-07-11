@@ -1,11 +1,12 @@
 'use client'
 import { ReactNode, useState } from "react";
-import styles from '../(pages)/page.module.css'
+import styles from './dropdown.module.css'
 
 
 interface Props {
     children?: ReactNode,
-    onChange: (e:any) => void
+    onChange: (e:any) => void,
+    id: string
 }
 interface OptionProps {
     value: string,
@@ -16,7 +17,7 @@ interface OptionProps {
 export function Dropdown(props: Props) {
     return (
         <>
-            <select className={styles.dropdownSelect} onChange={props.onChange}>
+            <select id={props.id} className={styles.dropdownSelect} onChange={props.onChange}>
                 {props.children}
             </select>
         </>
