@@ -1,0 +1,19 @@
+.filterBar {
+    margin: 2em 0 1em 0;
+    background: rgba(183, 198, 210, 0.85);
+    border-radius: 50px;
+    text-align: center;
+    padding: .3em;
+    width: 95%;
+    border-width: 4px;
+    border-color:rgba(228, 228, 228, 0.662);
+    border-style: solid;
+    box-shadow: 0px 0px 10px 5px rgba(228, 228, 228, 0.662);
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .filterBar {
+        margin: 1em 0 .2em 0;
+    }
+}
