@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ParkData } from "../(pages)/explore/parkDataInterface";
 import ParkElement from "./parkElement";
 import styles from "../(pages)/page.module.css"
-import FilterBar from "./filters/filterBar";
+import FilterBar from "./filterBar";
 import {StateFilter, stateFilterFunction} from "./filters/stateFilter";
 import { TypeFilter, typeFilterFunction } from "./filters/typeFilter";
 
@@ -22,20 +22,21 @@ export default function ParkList(props: Props) {
         setSelectedState(e.target.value);
     }
 
-    const [selectedType, setSelectedType] = useState<string>(''); // abbreviation
+    const [selectedType, setSelectedType] = useState<string>(''); 
     const handleSelectedType = (e: any) => {
         setSelectedType(e.target.value);
     }
-
+                
     return (
         <>
             <FilterBar>
                 <StateFilter handleSelected={handleSelectedState} />
                 <TypeFilter handleSelected={handleSelectedType} />
             </FilterBar>
-            {stateFilterFunction(
-                typeFilterFunction(parkData, selectedType), 
-                selectedState)
+            {
+            stateFilterFunction(
+                typeFilterFunction(parkData, [selectedType]), 
+                [selectedState])
                 .slice(0, limit)
                 .map((pd: ParkData, index: number) => {
                     return <ParkElement key={pd.id} parkData={pd} />
