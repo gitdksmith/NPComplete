@@ -35,8 +35,8 @@ export default function ParkList(props: Props) {
             </FilterBar>
             {
             stateFilterFunction(
-                typeFilterFunction(parkData, [selectedType]), 
-                [selectedState])
+                typeFilterFunction(parkData, selectedType), 
+                selectedState)
                 .slice(0, limit)
                 .map((pd: ParkData, index: number) => {
                     return <ParkElement key={pd.id} parkData={pd} />
