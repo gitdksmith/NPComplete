@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { Dropdown, Option } from "../dropdown";
 import states from "../../_data/states";
 import { ParkData } from "@/app/(pages)/explore/parkDataInterface";
