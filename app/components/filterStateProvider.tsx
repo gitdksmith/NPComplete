@@ -1,13 +1,8 @@
 "use client"
 import { Dispatch, ReactNode, createContext, useReducer } from 'react';
 
-interface Props {
-    children?: ReactNode
-}
-
 interface SelectedFilters {
-    selectedState: string,
-    selectedType: string
+    [key: string]: string,
 }
 
 interface FiltersAction {
@@ -17,7 +12,8 @@ interface FiltersAction {
 
 export enum FilterTypes {
     STATE_SELECTED = 'STATE_SELECTED',
-    TYPE_SELECTED = 'TYPE_SELECTED'
+    TYPE_SELECTED = 'TYPE_SELECTED',
+    FILTER_REMOVED = 'FILTER_REMOVED'
 }
 
 const initialState: SelectedFilters = {
@@ -45,6 +41,16 @@ function filtersReducer(filtersState: SelectedFilters, action: FiltersAction) {
             return {
                 ...filtersState,
                 selectedType: action.payload
+            }
+        }
+        case FilterTypes.FILTER_REMOVED: {
+            const tmp = {
+                ...filtersState,
+                [action.payload]: ''
+            }
+            return {
+                ...filtersState,
+                [action.payload]: ''
             }
         }
         default: {

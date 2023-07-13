@@ -4,10 +4,6 @@ import parkTypes from "../../_data/parkTypes";
 import { ParkData } from "@/app/(pages)/explore/parkDataInterface";
 import { FilterTypes, FiltersContext } from "../filterStateProvider";
 
-interface Props {
-    children?: ReactNode,
-}
-
 declare global {
     interface Array<T> {
         typeFilterFunction(): ParkData[];
@@ -20,7 +16,7 @@ export const TypeFilter = (props: Props) => {
         dispatch({ type: FilterTypes.TYPE_SELECTED, payload: e.target.value })
     }
     return (
-        <Dropdown id={"typeFilter"} onChange={handleSelectedType}>
+        <Dropdown id={"typeFilter"} stateModifier="selectedType" onChange={handleSelectedType}>
             <Option key={'default'} value={''} text={"Type"} />
             {
                 Object.keys(parkTypes).map(type => {

@@ -19,3 +19,10 @@ Feature: Explore Page
     Given The user navigates to the explore page
     When The user selects Monument from the type selector dropdown
     Then Only Monument parks are displayed
+
+  Scenario: The explore page filter modal opens
+    Given The user navigates to the explore page
+    When The user clicks on the filter icon
+    Then The filters modal is "visible"
+    When The user clicks off the modal
+    Then The filters modal is "hidden"

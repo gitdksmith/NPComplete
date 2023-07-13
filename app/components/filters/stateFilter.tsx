@@ -4,10 +4,6 @@ import states from "../../_data/states";
 import { ParkData } from "@/app/(pages)/explore/parkDataInterface";
 import { FilterTypes, FiltersContext } from "../filterStateProvider";
 
-interface Props {
-    children?: ReactNode,
-}
-
 declare global {
     interface Array<T> {
         stateFilterFunction(): ParkData[];
@@ -21,7 +17,7 @@ export const StateFilter = (props: Props) => {
     }
 
     return (
-        <Dropdown id={"stateFilter"} onChange={handleSelectedState}>
+        <Dropdown id="stateFilter" stateModifier="selectedState" onChange={handleSelectedState}>
             <Option key={'default'} value={''} text={"State"} />
             {
                 states.map(state => {

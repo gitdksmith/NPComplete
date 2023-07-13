@@ -4,26 +4,21 @@ import { useState } from "react";
 import { ParkData } from "../(pages)/explore/parkDataInterface";
 import ParkElement from "./parkElement";
 import styles from "../(pages)/page.module.css"
-import FilterBar from "./filterBar";
-import { StateFilter } from "./filters/stateFilter";
-import { TypeFilter } from "./filters/typeFilter";
+import FilterBar from "./filters/filterBar";
 
-interface Props {
+interface P extends Props {
     parkData: ParkData[]
 }
 
 const ENV_LIMIT: number = Number.parseInt(process.env.EXPLORE_LIST_LIMIT || '20');
 
-export default function ParkList(props: Props) {
+export default function ParkList(props: P) {
     const { parkData } = props;
-    const [limit, setLimit] = useState(ENV_LIMIT);
+    const [limit, setLimit] = useState(ENV_LIMIT); //todo reset this if filters change
 
     return (
         <>
-            <FilterBar>
-                <StateFilter />
-                <TypeFilter />
-            </FilterBar>
+            <FilterBar />
             {parkData.stateFilterFunction()
                 .typeFilterFunction()
                 .slice(0, limit)

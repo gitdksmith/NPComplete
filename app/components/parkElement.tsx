@@ -1,17 +1,16 @@
 'use client'
 
 import { ParkData } from "../(pages)/explore/parkDataInterface";
-import { forwardRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from '../components/parkElement.module.css'
 import useIntersectionOnScreen from "../hooks/useIntersectionObserver";
 
-interface Props {
+interface P extends Props {
     parkData: ParkData,
 }
 
-const ParkElement = function ParkElement(props: Props) {
+const ParkElement = function ParkElement(props: P) {
     const { parkData } = props;
 
     // const [containerRef, isVisible ] = useIntersectionOnScreen({

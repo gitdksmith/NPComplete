@@ -11,6 +11,16 @@ const navigateToExplorePage = async () => {
     }
 }
 
+const openFilterModal = async () => {
+    const element = await driver.findElement(By.css("#filterIcon"));
+    await element.click();
+}
+
+const closeFilterModal = async () => {
+    const action = driver.actions();
+    await action.move({x: 0, y: 0}).press().release().perform();
+}
+
 Given('The user navigates to the explore page', async function () {
     await navigateToExplorePage();
 });
@@ -24,7 +34,6 @@ Then('The explore page shows {int} elements', async (int) => {
     navigateToExplorePage();
     const elements = await driver.findElements(By.css("div[class^='parkElement_parkElement']"));
     expect(elements.length).toBe(int)
-
 })
 
 When('The user selects show more button', async () => {
@@ -32,8 +41,10 @@ When('The user selects show more button', async () => {
     await element.click();
 })
 When('The user selects TX from the state selector dropdown', async () => {
+    await openFilterModal();
     const element = await driver.findElement(By.css("#stateFilter > option:nth-child(52)"));
     await element.click();
+    await closeFilterModal();
 })
 
 Then('Only TX parks are displayed', async () => {
@@ -45,8 +56,10 @@ Then('Only TX parks are displayed', async () => {
 })
 
 When('The user selects Monument from the type selector dropdown', async () => {
+    await openFilterModal();
     const element = await driver.findElement(By.css("#typeFilter > option:nth-child(10)"));
     await element.click();
+    await closeFilterModal();
 })
 
 Then('Only Monument parks are displayed', async () => {
@@ -57,3 +70,16 @@ Then('Only Monument parks are displayed', async () => {
     }))
 })
 
+When('The user clicks on the filter icon', async () => {
+    await openFilterModal();
+})
+
+When('The user clicks off the modal', async () => {
+    await closeFilterModal();
+})
+
+Then('The filters modal is {string}', async (s) => {
+    const element = await driver.findElement(By.css("[class^='filterIconAndModal_modal']"));
+    const style = await element.getAttribute('style');
+    expect(style).toContain(s)
+})
