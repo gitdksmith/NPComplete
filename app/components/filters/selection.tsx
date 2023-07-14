@@ -17,8 +17,8 @@ export default function Selection({ filterKey, filterValue }: P) {
     }
 
     const iconValues = {
-        size: '1.25em',
-        style: { verticalAlign: 'middle' }
+        size: '1em',
+        style: { verticalAlign: 'middle', color: 'rgba(228, 228, 228, 0.9)'}
     }
 
     return (

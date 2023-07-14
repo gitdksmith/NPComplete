@@ -29,9 +29,9 @@ export default function FilterIconAndModal(props: Props) {
     return (
         <div>
             {/* Icon */}
-            <span id="filterIcon" tabIndex={0} ref={filterIconRef} 
-            onKeyDown={(e: {keyCode: number}) => { if (e.keyCode == 13) setShowModal(!showModal); }}
-            onClick={() => { setShowModal(!showModal); }}>
+            <span id="filterIcon" tabIndex={0} ref={filterIconRef}
+                onKeyDown={(e: { keyCode: number }) => { if (e.keyCode == 13) setShowModal(!showModal); }}
+                onClick={() => { setShowModal(!showModal); }}>
                 <MdFilterList />
             </span>
 
