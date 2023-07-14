@@ -4,39 +4,23 @@ import { useState } from "react";
 import { ParkData } from "../(pages)/explore/parkDataInterface";
 import ParkElement from "./parkElement";
 import styles from "../(pages)/page.module.css"
-import FilterBar from "./filterBar";
-import {StateFilter, stateFilterFunction} from "./filters/stateFilter";
-import { TypeFilter, typeFilterFunction } from "./filters/typeFilter";
+import FilterBar from "./filters/filterBar";
 
-interface Props {
+interface P extends Props {
     parkData: ParkData[]
 }
 
 const ENV_LIMIT: number = Number.parseInt(process.env.EXPLORE_LIST_LIMIT || '20');
 
-export default function ParkList(props: Props) {
+export default function ParkList(props: P) {
     const { parkData } = props;
-    const [limit, setLimit] = useState(ENV_LIMIT);
-    const [selectedState, setSelectedState] = useState<string>(''); // abbreviation
-    const handleSelectedState = (e: any) => {
-        setSelectedState(e.target.value);
-    }
+    const [limit, setLimit] = useState(ENV_LIMIT); //todo reset this if filters change
 
-    const [selectedType, setSelectedType] = useState<string>(''); 
-    const handleSelectedType = (e: any) => {
-        setSelectedType(e.target.value);
-    }
-                
     return (
         <>
-            <FilterBar>
-                <StateFilter handleSelected={handleSelectedState} />
-                <TypeFilter handleSelected={handleSelectedType} />
-            </FilterBar>
-            {
-            stateFilterFunction(
-                typeFilterFunction(parkData, selectedType), 
-                selectedState)
+            <FilterBar />
+            {parkData.stateFilterFunction()
+                .typeFilterFunction()
                 .slice(0, limit)
                 .map((pd: ParkData, index: number) => {
                     return <ParkElement key={pd.id} parkData={pd} />

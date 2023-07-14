@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { ParkData } from './parkDataInterface';
 import ParkList from '../../components/parkList';
 import styles from '../page.module.css';
+import { FiltersProvider } from '@/app/components/filterStateProvider';
 
 
 async function getParkData(): Promise<{ data: ParkData[] }> {
@@ -38,8 +39,10 @@ export default async function Page() {
   const parkData: ParkData[] = (await getParkData()).data;
   return (
     <>
-      <h1 style={{textAlign:'center'}}>Explore all the parks!</h1>
-      <ParkList parkData={parkData}></ParkList>
+      <h1 style={{ textAlign: 'center' }}>Explore all the parks!</h1>
+      <FiltersProvider>
+        <ParkList parkData={parkData}></ParkList>
+      </FiltersProvider>
     </>
   )
 

@@ -6,10 +6,6 @@ export const metadata: Metadata = {
     title: 'NPComlete Explore',
 }
 
-interface Props {
-    children?: ReactNode
-}
-
 export default function explore({ children }: Props) {
     return (
         <div className={styles.container}>
