@@ -1,7 +1,7 @@
 'use client'
 import { ReactNode, useContext, useState } from "react";
 import styles from './dropdown.module.css'
-import { FiltersContext } from "./filterStateProvider";
+import { FiltersContext } from "./filters/filterStateProvider";
 
 
 interface P extends Props{

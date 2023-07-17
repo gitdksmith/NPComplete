@@ -1,30 +1,36 @@
 import React, { useContext } from 'react'
-import { FilterTypes, FiltersContext } from '../filterStateProvider';
+import { FilterTypes, FiltersContext } from './filterStateProvider';
 import { MdOutlineCancel } from 'react-icons/md';
 import styles from './selection.module.css'
 import { IconContext } from 'react-icons';
 
 
 interface P extends Props {
-    filterKey: string,
-    filterValue: string
+    filterName: string,
+    filterValue: string,
+    filterText: string
 }
-export default function Selection({ filterKey, filterValue }: P) {
+export default function Selection({ filterName, filterValue, filterText }: P) {
     const { dispatch } = useContext(FiltersContext);
 
-    const onHandleClose = (filterName: string) => {
-        dispatch({ type: FilterTypes.FILTER_REMOVED, payload: filterName })
+    const onHandleClose = (filterName: string, filterValue: string) => {
+        if (filterName == 'selectedActivities') {
+            dispatch({ type: FilterTypes.ACTIVITY_REMOVED, payload: filterValue })
+        }
+        else{
+            dispatch({ type: FilterTypes.FILTER_REMOVED, payload: filterName })
+        }
     }
 
     const iconValues = {
         size: '1em',
-        style: { verticalAlign: 'middle', color: 'rgba(228, 228, 228, 0.9)'}
+        style: { verticalAlign: 'middle', color: 'rgba(228, 228, 228, 0.9)' }
     }
 
     return (
         <IconContext.Provider value={iconValues}>
-            <span className={styles.selection} onClick={() => onHandleClose(filterKey)}>
-                <span>{filterValue}</span>
+            <span className={styles.selection} onClick={() => onHandleClose(filterName, filterValue)}>
+                <span data-testid="filter-selected-name" >{filterText}</span>
                 <span className={styles.xicon}><MdOutlineCancel /></span>
             </span>
         </IconContext.Provider>

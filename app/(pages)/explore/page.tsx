@@ -1,34 +1,10 @@
 import { Metadata } from 'next';
-import { ParkData } from './parkDataInterface';
 import ParkList from '../../components/parkList';
+import { ParkData } from '@/app/_data/parkDataInterface';
+import { getActivityData, getParkData } from '@/app/_data/npsAPIRequests';
 import styles from '../page.module.css';
-import { FiltersProvider } from '@/app/components/filterStateProvider';
-
-
-async function getParkData(): Promise<{ data: ParkData[] }> {
-  const requestOptions = {
-    method: 'GET',
-    headers: {
-      'x-api-key': process.env.NP_X_API_KEY || '',
-    },
-  }
-
-  const checkRes = await fetch(`https://developer.nps.gov/api/v1/parks?limit=1`, requestOptions);
-  const checkResJson = await checkRes.json();
-  const limit = process.env.NODE_ENV == 'development' ? 150 : checkResJson.total;
-  // TODO get this into redux and don't fetch if already in state
-  // TODO suspense/loading wrapper
-  // NextJS complains that the response size is too large to cache (>2MB)
-  const res = await fetch(`https://developer.nps.gov/api/v1/parks?limit=${limit}`, requestOptions);
-
-  // TODO: handle errors
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data')
-  }
-
-  return res.json()
-}
+import { FiltersProvider } from '@/app/components/filters/filterStateProvider';
+import { Activity } from '@/app/_data/activitiesDataInterface';
 
 
 export const metadata: Metadata = {
@@ -37,11 +13,29 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   const parkData: ParkData[] = (await getParkData()).data;
+
+  const activityData: Activity[] = (await getActivityData()).data;
+
+
+  // const actMap:{[key:string]:string} = {};
+
+  // parkData.map((d:ParkData) => {
+  //   d.activities.map((act: Activity) => {
+  //     actMap[act.id] = act.name;
+  //   })
+  // })
+
+  // Object.entries(actMap)
+  // .sort(([x,a],[y,b]) => a.localeCompare(b))
+  // .map(([id, name]) => {
+  //   console.log('"' + id + '"' + ': "' + name + '",')
+  // })
+
   return (
     <>
       <h1 style={{ textAlign: 'center' }}>Explore all the parks!</h1>
       <FiltersProvider>
-        <ParkList parkData={parkData}></ParkList>
+        <ParkList parkData={parkData} activityData={activityData}></ParkList>
       </FiltersProvider>
     </>
   )
