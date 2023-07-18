@@ -43,7 +43,7 @@ const ParkElement = function ParkElement(props: P) {
                 <p><Link target="_blank" href={parkData.url}>{parkData.url}</Link></p>
                 <h3 className="stateTag">{parkData.states}</h3>
                 {selectedActivities.length != 0 && 
-                <p className="activitiesTag">Filtered activities: {matchingActivities()}</p>}
+                <p className="activitiesTag">With activities: {matchingActivities()}</p>}
             </div>
 
             <div className={styles.imageContainer}>
