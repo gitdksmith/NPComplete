@@ -1,11 +1,18 @@
 "use client"
 import { Dispatch, ReactNode, createContext, useReducer } from 'react';
 
-interface SelectedFilters {
-    // [key: string]: any,
-    selectedState: string,
-    selectedType: string,
-    selectedActivities: string[]
+export enum FilterTypes {
+    STATE_SELECTED = 'STATE_SELECTED',
+    TYPE_SELECTED = 'TYPE_SELECTED',
+    FILTER_REMOVED = 'FILTER_REMOVED',
+    ACTIVITY_SELECTED = 'ACTIVITY_SELECTED',
+    ACTIVITY_REMOVED = 'ACTIVITY_REMOVED',
+    ACTIVITY_TOGGLE_CLICK = 'ACTIVITY_TOGGLE_CLICK'
+}
+
+export enum ActivitiesToggle {
+    AND = 'AND',
+    OR = 'OR'
 }
 
 interface FiltersAction {
@@ -13,18 +20,19 @@ interface FiltersAction {
     payload: string
 }
 
-export enum FilterTypes {
-    STATE_SELECTED = 'STATE_SELECTED',
-    TYPE_SELECTED = 'TYPE_SELECTED',
-    FILTER_REMOVED = 'FILTER_REMOVED',
-    ACTIVITY_SELECTED = 'ACTIVITY_SELECTED',
-    ACTIVITY_REMOVED = 'ACTIVITY_REMOVED'
+interface SelectedFilters {
+    // [key: string]: any,
+    selectedState: string,
+    selectedType: string,
+    selectedActivities: string[],
+    selectedActivitiesToggle: ActivitiesToggle
 }
 
 const initialState: SelectedFilters = {
     selectedState: '',
     selectedType: '',
-    selectedActivities: []
+    selectedActivities: [],
+    selectedActivitiesToggle: ActivitiesToggle.AND
 };
 
 export const FiltersContext = createContext<{
@@ -50,23 +58,22 @@ function filtersReducer(filtersState: SelectedFilters, action: FiltersAction) {
             }
         }
         case FilterTypes.ACTIVITY_SELECTED: {
-            const tmp = {
-                ...filtersState,
-                selectedActivities: [...filtersState.selectedActivities, action.payload]
-            }
             return {
                 ...filtersState,
                 selectedActivities: [...filtersState.selectedActivities, action.payload]
             }
         }
         case FilterTypes.ACTIVITY_REMOVED: {
-            const tmp = {
-                ...filtersState,
-                selectedActivities: filtersState.selectedActivities.filter((act:string) => act != action.payload)
-            }
             return {
                 ...filtersState,
-                selectedActivities: filtersState.selectedActivities.filter((act:string) => act != action.payload)
+                selectedActivities: filtersState.selectedActivities.filter((act: string) => act != action.payload)
+            }
+        }
+        case FilterTypes.ACTIVITY_TOGGLE_CLICK: {
+            return {
+                ...filtersState,
+                selectedActivitiesToggle: filtersState.selectedActivitiesToggle == ActivitiesToggle.AND ?
+                    ActivitiesToggle.OR : ActivitiesToggle.AND
             }
         }
         case FilterTypes.FILTER_REMOVED: {
