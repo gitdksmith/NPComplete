@@ -33,6 +33,14 @@
     padding: .3rem 1em;
 }
 
+.nameTag {
+    margin-bottom: .5em;
+}
+
+.stateTag {
+    margin-bottom: .5em;
+}
+
 .imageContainer {
     position: relative;
     /* width: 33vw; */

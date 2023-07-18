@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { ParkData } from "../_data/parkDataInterface";
 import ParkElement from "./parkElement";
-import styles from "../(pages)/page.module.css"
+import styles from "./parkList.module.css"
 import FilterBar from "./filters/filterBar";
 import { Activity } from "../_data/activitiesDataInterface";
 
@@ -29,7 +29,7 @@ export default function ParkList(props: P) {
                     return <ParkElement key={pd.id} parkData={pd} />
                 })}
             <h2>end</h2>
-            <button className={styles.loadMore} onClick={() => setLimit(limit + ENV_LIMIT)}>Load More</button>
+            <button className={styles.showMore} onClick={() => setLimit(limit + ENV_LIMIT)}>Show More</button>
         </>
     )
 }
