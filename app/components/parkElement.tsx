@@ -7,6 +7,7 @@ import styles from '../components/parkElement.module.css'
 import useIntersectionOnScreen from "../hooks/useIntersectionObserver";
 import { useContext } from "react";
 import { FiltersContext } from "./filters/filterStateProvider";
+import states from "../_data/states";
 
 interface P extends Props {
     parkData: ParkData,
@@ -34,6 +35,16 @@ const ParkElement = function ParkElement(props: P) {
         return matchNames.join(', ');
     }
 
+    const getStateNames = (abbreviations: string): string => {
+        const abvList = abbreviations.split(',');
+        const stateList = [];
+        for(const abv of abvList) {
+            const state = states.find((s) => s.abbreviation == abv);
+            stateList.push(state?.name);
+        }
+        return stateList.join(", ");
+    }
+
     return (
         // <div className={`${styles.parkElement} ${isVisible ? styles.parkElementVisible : ''}`}>
         <div className={`${styles.parkElement}`}>
@@ -41,7 +52,7 @@ const ParkElement = function ParkElement(props: P) {
             <div className={styles.parkInfo}>
                 <h2>{parkData.fullName}</h2>
                 <p><Link target="_blank" href={parkData.url}>{parkData.url}</Link></p>
-                <h3 className="stateTag">{parkData.states}</h3>
+                <h3 className="stateTag">{getStateNames(parkData.states)}</h3>
                 {selectedActivities.length != 0 && 
                 <p className="activitiesTag">With activities: {matchingActivities()}</p>}
             </div>
