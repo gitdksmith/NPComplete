@@ -21,7 +21,7 @@ interface FiltersAction {
 }
 
 interface SelectedFilters {
-    // [key: string]: any,
+    [key: string]: string | string[] | ActivitiesToggle,
     selectedState: string,
     selectedType: string,
     selectedActivities: string[],

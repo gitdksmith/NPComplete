@@ -1,9 +1,11 @@
 .dropdownSelect {
-    max-width: 6rem;
+    max-width: 7rem;
     height: 2em;
     border-radius: 25px;
     padding-left: 0.5em;
     margin: .5em .5em;
-    background-color: rgba(83, 130, 83, 0.756);
-    font-size: medium;
+    background-color: rgba(75, 77, 75, 0.587);
+    /* TODO theme this color, matches activities selections */
+    /* background-color: rgba(83, 130, 83, 0.756); */
+    font-size: large;
   }
