@@ -52,12 +52,11 @@ export const ActivityFilter = (props: P) => {
                 {
                     activityData && activityData.map(({ id, name }) => {
                         return (
-                            // TODO change to button for accessibility support 
-                            <span className={styles.activityButton} key={id}
+                            <button className={styles.activityButton} key={id}
                                 style={selectedActivities.includes(id) ? { backgroundColor: 'rgba(83, 130, 83, 0.756)' } : {}}
                                 onClick={() => handleSelectedActivity(id)} >
                                 {name}
-                            </span>
+                            </button>
                         )
                     })
                 }

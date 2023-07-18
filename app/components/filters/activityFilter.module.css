@@ -40,11 +40,10 @@
     margin: .25em .25em;
     padding: .5em .5em;
     border-radius: 25px;
-
-    border-radius: 25px;
     border-color: rgba(228, 228, 228, 0.9);
     border-width: 2px;
     border-style: solid;
+    font-size: medium;
 }
 
 .title {

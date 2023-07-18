@@ -17,7 +17,7 @@ export default function Selection({ filterName, filterValue, filterText }: P) {
         if (filterName == 'selectedActivities') {
             dispatch({ type: FilterTypes.ACTIVITY_REMOVED, payload: filterValue })
         }
-        else{
+        else {
             dispatch({ type: FilterTypes.FILTER_REMOVED, payload: filterName })
         }
     }
@@ -30,10 +30,10 @@ export default function Selection({ filterName, filterValue, filterText }: P) {
     return (
         <IconContext.Provider value={iconValues}>
             {/* TODO chage to buttons for accessibility support */}
-            <span className={styles.selection} onClick={() => onHandleClose(filterName, filterValue)}>
+            <button className={styles.selection} onClick={() => onHandleClose(filterName, filterValue)}>
                 <span data-testid="filter-selected-name" >{filterText}</span>
                 <span className={styles.xicon}><MdOutlineCancel /></span>
-            </span>
+            </button>
         </IconContext.Provider>
     )
 }
