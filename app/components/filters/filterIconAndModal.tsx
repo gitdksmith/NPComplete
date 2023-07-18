@@ -36,8 +36,8 @@ export default function FilterIconAndModal(props: Props) {
             </span>
 
             {/* Modal */}
-            <div className={styles.modalContainer} style={{ visibility: showModal ? 'visible' : 'hidden' }} >
-                <div ref={modalRef} className={styles.modal} style={{ visibility: showModal ? 'visible' : 'hidden' }} >
+            <div className={styles.modalContainer} style={{ display: showModal ? 'flex' : 'none' }} >
+                <div ref={modalRef} className={styles.modal} style={{ display: showModal ? 'flex' : 'none' }} >
                     {props.children}
                 </div>
             </div>

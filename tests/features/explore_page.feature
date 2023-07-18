@@ -26,3 +26,9 @@ Feature: Explore Page
     Then The filters modal is "visible"
     When The user clicks off the modal
     Then The filters modal is "hidden"
+
+  Scenario: The explore page can be filtered by activity
+    Given The user navigates to the explore page
+    When The user selects multiple activities from the filter modal
+    Then Only parks with those activities are displayed
+    And Each activity is shown in the filters toolbar

@@ -7,7 +7,7 @@ export interface ParkData {
     latitude: string
     longitude: string
     latLong: string
-    activities: Activity[]
+    activities: ParkActivity[]
     topics: Topic[]
     states: string
     contacts: Contacts
@@ -24,7 +24,7 @@ export interface ParkData {
     designation: string
 }
 
-export interface Activity {
+export interface ParkActivity {
     id: string
     name: string
 }

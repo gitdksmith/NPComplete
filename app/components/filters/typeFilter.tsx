@@ -1,8 +1,8 @@
 import { ReactNode, useContext, useState } from "react";
 import { Dropdown, Option } from "../dropdown";
 import parkTypes from "../../_data/parkTypes";
-import { ParkData } from "@/app/(pages)/explore/parkDataInterface";
-import { FilterTypes, FiltersContext } from "../filterStateProvider";
+import { ParkData } from "@/app/_data/parkDataInterface";
+import { FilterTypes, FiltersContext } from "./filterStateProvider";
 
 declare global {
     interface Array<T> {

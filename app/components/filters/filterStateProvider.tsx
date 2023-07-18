@@ -2,7 +2,10 @@
 import { Dispatch, ReactNode, createContext, useReducer } from 'react';
 
 interface SelectedFilters {
-    [key: string]: string,
+    // [key: string]: any,
+    selectedState: string,
+    selectedType: string,
+    selectedActivities: string[]
 }
 
 interface FiltersAction {
@@ -13,12 +16,15 @@ interface FiltersAction {
 export enum FilterTypes {
     STATE_SELECTED = 'STATE_SELECTED',
     TYPE_SELECTED = 'TYPE_SELECTED',
-    FILTER_REMOVED = 'FILTER_REMOVED'
+    FILTER_REMOVED = 'FILTER_REMOVED',
+    ACTIVITY_SELECTED = 'ACTIVITY_SELECTED',
+    ACTIVITY_REMOVED = 'ACTIVITY_REMOVED'
 }
 
 const initialState: SelectedFilters = {
     selectedState: '',
-    selectedType: ''
+    selectedType: '',
+    selectedActivities: []
 };
 
 export const FiltersContext = createContext<{
@@ -41,6 +47,26 @@ function filtersReducer(filtersState: SelectedFilters, action: FiltersAction) {
             return {
                 ...filtersState,
                 selectedType: action.payload
+            }
+        }
+        case FilterTypes.ACTIVITY_SELECTED: {
+            const tmp = {
+                ...filtersState,
+                selectedActivities: [...filtersState.selectedActivities, action.payload]
+            }
+            return {
+                ...filtersState,
+                selectedActivities: [...filtersState.selectedActivities, action.payload]
+            }
+        }
+        case FilterTypes.ACTIVITY_REMOVED: {
+            const tmp = {
+                ...filtersState,
+                selectedActivities: filtersState.selectedActivities.filter((act:string) => act != action.payload)
+            }
+            return {
+                ...filtersState,
+                selectedActivities: filtersState.selectedActivities.filter((act:string) => act != action.payload)
             }
         }
         case FilterTypes.FILTER_REMOVED: {

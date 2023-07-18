@@ -3,6 +3,7 @@
     height: 2em;
     border-radius: 25px;
     padding-left: 0.5em;
-    margin: 1em 1em;
+    margin: .5em .5em;
     background-color: rgba(83, 130, 83, 0.756);
+    font-size: medium;
   }
