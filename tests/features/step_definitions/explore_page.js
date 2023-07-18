@@ -3,6 +3,7 @@ const { driver, By } = require('./driver');
 const expect = require('expect').expect;
 
 const HOST = 'http://localhost:3000/explore'; // todo need a better way to do this for other env.
+let clickedActivities = [];
 
 const navigateToExplorePage = async () => {
     const currentUrl = await driver.getCurrentUrl();
@@ -18,7 +19,14 @@ const openFilterModal = async () => {
 
 const closeFilterModal = async () => {
     const action = driver.actions();
-    await action.move({x: 0, y: 0}).press().release().perform();
+    await action.move({ x: 0, y: 0 }).press().release().perform();
+}
+
+const clearFilters = async () => {
+    const elements = await driver.findElements(By.css("span[class^='selection_selection']"));
+    for (const e of elements) {
+        await e.click();
+    }
 }
 
 Given('The user navigates to the explore page', async function () {
@@ -52,12 +60,12 @@ Then('Only TX parks are displayed', async () => {
     await Promise.all(elements.map(async (element) => {
         const text = await element.getText();
         expect(text.includes('TX')).toBeTruthy();
-    }))
+    }));
 })
 
 When('The user selects Monument from the type selector dropdown', async () => {
     await openFilterModal();
-    const element = await driver.findElement(By.css("#typeFilter > option:nth-child(10)"));
+    const element = await driver.findElement(By.css("#typeFilter > option:nth-child(6)"));
     await element.click();
     await closeFilterModal();
 })
@@ -79,7 +87,41 @@ When('The user clicks off the modal', async () => {
 })
 
 Then('The filters modal is {string}', async (s) => {
+    const expected = s == 'visible' ? 'display: flex' : 'display: none'
     const element = await driver.findElement(By.css("[class^='filterIconAndModal_modal']"));
     const style = await element.getAttribute('style');
-    expect(style).toContain(s)
+    expect(style).toContain(expected)
+})
+
+When('The user selects multiple activities from the filter modal', async () => {
+    await clearFilters();
+    await openFilterModal();
+    const element1 = await driver.findElement(By.css("#activitiesContainer > span:nth-child(1)"));
+    const element2 = await driver.findElement(By.css("#activitiesContainer > span:nth-child(2)"));
+
+    clickedActivities.push(await element1.getText());
+    clickedActivities.push(await element2.getText());
+
+    await element1.click();
+    await element2.click();
+
+    await closeFilterModal();
+})
+
+Then('Only parks with those activities are displayed', async () => {
+    const elements = await driver.findElements(By.className('activitiesTag'));
+    await Promise.all(elements.map(async (element) => {
+        const text = await element.getText();
+        const activities = text.split(": ")[1].split(", ");
+        for (const activity of activities) {
+            expect(clickedActivities.includes(activity)).toBeTruthy();
+        }
+    }));
+})
+
+Then('Each activity is shown in the filters toolbar', async () => {
+    const elements = await driver.findElements(By.css("span[data-testid='filter-selected-name']"));
+    for (const e of elements) {
+        expect(clickedActivities.includes(await e.getText())).toBeTruthy();
+    }
 })
