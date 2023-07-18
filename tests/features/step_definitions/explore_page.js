@@ -45,7 +45,7 @@ Then('The explore page shows {int} elements', async (int) => {
 })
 
 When('The user selects show more button', async () => {
-    const element = await driver.findElement(By.css("button[class^='page_loadMore']"));
+    const element = await driver.findElement(By.css("button[class^='parkList_showMore']"));
     await element.click();
 })
 When('The user selects TX from the state selector dropdown', async () => {
@@ -96,8 +96,8 @@ Then('The filters modal is {string}', async (s) => {
 When('The user selects multiple activities from the filter modal', async () => {
     await clearFilters();
     await openFilterModal();
-    const element1 = await driver.findElement(By.css("#activitiesContainer > span:nth-child(1)"));
-    const element2 = await driver.findElement(By.css("#activitiesContainer > span:nth-child(2)"));
+    const element1 = await driver.findElement(By.css("#activitiesContainer > button:nth-child(1)"));
+    const element2 = await driver.findElement(By.css("#activitiesContainer > button:nth-child(2)"));
 
     clickedActivities.push(await element1.getText());
     clickedActivities.push(await element2.getText());
@@ -120,7 +120,7 @@ Then('Only parks with those activities are displayed', async () => {
 })
 
 Then('Each activity is shown in the filters toolbar', async () => {
-    const elements = await driver.findElements(By.css("span[data-testid='filter-selected-name']"));
+    const elements = await driver.findElements(By.css("button[data-testid='filter-selected-name']"));
     for (const e of elements) {
         expect(clickedActivities.includes(await e.getText())).toBeTruthy();
     }
