@@ -33,7 +33,7 @@ export default async function Page() {
 
   return (
     <>
-      <h1 style={{ textAlign: 'center' }}>Explore all the parks!</h1>
+      <h1 style={{ textAlign: 'center' }}>Explore U.S. National Parks</h1>
       <FiltersProvider>
         <ParkList parkData={parkData} activityData={activityData}></ParkList>
       </FiltersProvider>
