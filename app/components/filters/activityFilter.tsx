@@ -34,16 +34,18 @@ export const ActivityFilter = (props: P) => {
         <>
             <div className={styles.title}>
                 <span>Activities</span>
-                <span>
-                    <input type="radio" onClick={handleActivityToggle} id="and" name="activityToggleGroup"
-                        value="and" checked={selectedActivitiesToggle == ActivitiesToggle.AND} />
-                    <label htmlFor="and"> and</label>
-                </span>
-                <span>
-                    <input type="radio" onClick={handleActivityToggle} id="or" name="activityToggleGroup"
-                        value="or" checked={selectedActivitiesToggle == ActivitiesToggle.OR}/>
-                    <label htmlFor="or"> or</label>
-                </span>
+                <div>
+                    <span>
+                        <input type="radio" onClick={handleActivityToggle} id="and" name="activityToggleGroup"
+                            value="and" checked={selectedActivitiesToggle == ActivitiesToggle.AND} />
+                        <label id={styles.andLabel} htmlFor="and"> and</label>
+                    </span>
+                    <span>
+                        <input type="radio" onClick={handleActivityToggle} id="or" name="activityToggleGroup"
+                            value="or" checked={selectedActivitiesToggle == ActivitiesToggle.OR} />
+                        <label id={styles.orLabel} htmlFor="or"> or</label>
+                    </span>
+                </div>
             </div>
             <hr className={styles.titleHr} />
             <div id="activitiesContainer" className={styles.activitiesContainer}>

@@ -59,3 +59,7 @@
 .titleHr {
     border: 1px solid white;
 }
+
+#andLabel {
+    padding: 0 1em 0 0
+}
