@@ -50,9 +50,9 @@ const ParkElement = function ParkElement(props: P) {
         <div className={`${styles.parkElement}`}>
             <div /*ref={containerRef}*/ id={styles.sensor}></div>
             <div className={styles.parkInfo}>
-                <h2>{parkData.fullName}</h2>
-                <p><Link target="_blank" href={parkData.url}>{parkData.url}</Link></p>
-                <h3 className="stateTag">{getStateNames(parkData.states)}</h3>
+                {/* <h2>{parkData.fullName}</h2> */}
+                <h2 className={styles.nameTag}><Link target="_blank" href={parkData.url}>{parkData.fullName}</Link></h2>
+                <h3 className={styles.stateTag}>{getStateNames(parkData.states)}</h3>
                 {selectedActivities.length != 0 && 
                 <p className="activitiesTag">With activities: {matchingActivities()}</p>}
             </div>
